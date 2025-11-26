@@ -11,6 +11,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+
     final theme = Theme.of(context);
     return FloatingColorComponent(
       child: Scaffold(

@@ -14,7 +14,7 @@ class SignupButtonWidget extends StatelessWidget {
       onPressed: () {
         Navigator.pushNamed(context, RoutesName.home);
       },
-      name: loc.signIn,
+      name: loc.signUp,
     );
   }
 }
