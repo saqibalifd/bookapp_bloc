@@ -1,3 +1,4 @@
+import 'package:bookapp/config/component/components.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class MainButtonComponent extends StatelessWidget {
   final Color? color;
   final double? textSize;
   final Color? textColor;
+  final bool isLoading;
   const MainButtonComponent({
     super.key,
     required this.onPressed,
@@ -16,6 +18,7 @@ class MainButtonComponent extends StatelessWidget {
     this.textColor,
     this.color,
     this.textSize,
+    this.isLoading = false,
   });
 
   @override
@@ -23,7 +26,7 @@ class MainButtonComponent extends StatelessWidget {
     final theme = Theme.of(context);
     return MaterialButton(
       minWidth: minWidth ?? context.mediaQueryWidth * 1,
-      onPressed: onPressed,
+      onPressed: isLoading ? null : onPressed,
       color: color ?? theme.colorScheme.primary,
       elevation: 6,
       highlightElevation: 10,
@@ -33,15 +36,17 @@ class MainButtonComponent extends StatelessWidget {
         horizontal: context.mediaQueryWidth * .08,
         vertical: context.mediaQueryHeight * .02,
       ),
-      child: Text(
-        name,
-        style: textSize == null
-            ? theme.textTheme.titleSmall
-            : theme.textTheme.titleSmall!.copyWith(
-                fontSize: textSize,
-                color: textColor,
-              ),
-      ),
+      child: isLoading
+          ? LoadingWidget()
+          : Text(
+              name,
+              style: textSize == null
+                  ? theme.textTheme.titleSmall
+                  : theme.textTheme.titleSmall!.copyWith(
+                      fontSize: textSize,
+                      color: textColor,
+                    ),
+            ),
     );
   }
 }

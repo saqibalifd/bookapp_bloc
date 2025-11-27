@@ -1,4 +1,5 @@
+import 'package:bookapp/models/login/loginModel.dart';
 
 abstract class AuthApiRepository {
-  // Future<UserModel> loginApi(dynamic data);
+  Future<LoginModel> loginApi(dynamic data);
 }
