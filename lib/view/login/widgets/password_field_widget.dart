@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordFieldWidget extends StatelessWidget {
-  const PasswordFieldWidget({super.key});
+  final TextEditingController passwordController;
+  const PasswordFieldWidget({super.key,required this.passwordController});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class PasswordFieldWidget extends StatelessWidget {
       child: BlocBuilder<VisibilityCubit, bool>(
         builder: (context, isObsecure) {
           return TextFormField(
+            controller:passwordController ,
             obscureText: isObsecure,
             decoration: InputDecoration(
               hintText: loc.password,

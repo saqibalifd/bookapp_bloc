@@ -1,16 +1,21 @@
-import 'package:bookapp/data/network/network.dart';
+import 'package:bookapp/data/network/network_api_service.dart';
 import 'package:bookapp/models/login/loginModel.dart';
-
+import '../../utils/api_endpoints.dart';
 import 'auth_api_repository.dart';
 
 class AuthHttpApiRepository implements AuthApiRepository {
-  final BaseApiServices _apiServices = NetworkApiService();
+  final NetworkApiService _apiService = NetworkApiService();
+
   @override
   Future<LoginModel> loginApi(dynamic data) async {
-    dynamic response = await _apiServices.postApi(
-      '${ApiEndpoints.reqresBAseUrl}${ApiEndpoints.reqresLogin}',
-      data,
-    );
-    return LoginModel.fromJson(response);
+    try {
+      final response = await _apiService.postApi(
+        ApiEndpoints.reqresBAseUrl + ApiEndpoints.reqresLogin,
+        data,
+      );
+      return LoginModel.fromJson(response);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
