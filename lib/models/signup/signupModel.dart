@@ -5,7 +5,7 @@ part 'signupModel.g.dart';
 
 @freezed
 abstract class SignupModel with _$SignupModel {
-  const factory SignupModel({required int id, required String token}) =
+  const factory SignupModel({  @Default(0) int id,  @Default('') String token,    @Default('') String error,}) =
       _SignupModel;
 
   factory SignupModel.fromJson(Map<String, Object?> json) =>

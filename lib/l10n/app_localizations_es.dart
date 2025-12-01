@@ -133,4 +133,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get about => 'Acerca de';
+
+  @override
+  String get enterEmail => 'Ingrese correo electrónico';
+
+  @override
+  String get enterPassword => 'Ingrese contraseña';
+
+  @override
+  String get emailIsNotCorrect => 'El correo electrónico no es correcto';
+
+  @override
+  String get pleaseEnterGreateSixChar => 'Por favor ingrese una contraseña de más de 6 caracteres';
 }
