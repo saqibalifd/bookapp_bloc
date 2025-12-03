@@ -20,7 +20,7 @@ class _TestScreenState extends State<TestScreen> {
   void initState() {
     super.initState();
     _bookBloc = BookBloc(booksApiRepository: getIt());
-    _bookBloc.add(FetchBooksEvent()); // <-- call API here
+    _bookBloc.add(BooksFetch());
   }
 
   @override
