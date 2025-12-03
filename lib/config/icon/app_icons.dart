@@ -10,6 +10,7 @@ class AppIcons {
   static const IconData person = Iconsax.user;
   static const IconData search = Iconsax.search_normal;
   static const IconData tick = Iconsax.tick_circle;
+  static const IconData logout = Iconsax.logout;
 
   //material icons
   static const IconData favourite = Icons.bookmark;

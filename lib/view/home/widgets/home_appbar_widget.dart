@@ -32,6 +32,14 @@ class HomeAppbarWidget extends StatelessWidget {
             );
           },
         ),
+        //only for testing start *************
+        IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, RoutesName.test);
+          },
+          icon: Icon(Icons.developer_mode),
+        ),
+        // testing complete ***************
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: context.mediaQueryWidth * 0.05,

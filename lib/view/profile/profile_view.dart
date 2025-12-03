@@ -1,12 +1,28 @@
+import 'package:bookapp/bloc/logout/logout_bloc.dart';
 import 'package:bookapp/config/component/floating_color_component.dart';
 import 'package:bookapp/config/icon/app_icons.dart';
+import 'package:bookapp/dependencies_injection/dependencies_injection.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:bookapp/view/profile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  late LogoutBloc _logoutBloc;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _logoutBloc = LogoutBloc(getIt());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +64,11 @@ class ProfileView extends StatelessWidget {
                 ProfileEmailFieldWidget(),
                 10.height,
                 ProfileAboutFieldWidget(),
+                30.height,
+                BlocProvider(
+                  create: (context) => _logoutBloc,
+                  child: LogoutButtonWidget(),
+                ),
               ],
             ),
           ),

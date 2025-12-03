@@ -45,6 +45,10 @@ class Routes {
         return MaterialPageRoute(
           builder: (BuildContext context) => ProfileView(),
         );
+      case RoutesName.test:
+        return MaterialPageRoute(
+          builder: (BuildContext context) => TestScreen(),
+        );
 
       default:
         return MaterialPageRoute(

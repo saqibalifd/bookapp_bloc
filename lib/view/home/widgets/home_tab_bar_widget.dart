@@ -59,7 +59,7 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                   return Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: context.mediaQueryWidth * .03,
-                      vertical: context.mediaQueryHeight * .03,
+                      vertical: context.mediaQueryHeight * .027,
                     ),
                     child: GestureDetector(
                       onTap: () =>
