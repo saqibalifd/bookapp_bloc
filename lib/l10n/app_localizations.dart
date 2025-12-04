@@ -372,6 +372,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'please enter password greater than 6 char'**
   String get pleaseEnterGreateSixChar;
+
+  /// No description provided for @categoriesListIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! The categories list is currently empty'**
+  String get categoriesListIsEmpty;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! Something didn’t work.'**
+  String get somethingWentWrong;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

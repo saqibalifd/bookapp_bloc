@@ -145,4 +145,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get pleaseEnterGreateSixChar => 'Por favor ingrese una contraseña de más de 6 caracteres';
+
+  @override
+  String get categoriesListIsEmpty => '¡Vaya! La lista de categorías está vacía en este momento.';
+
+  @override
+  String get somethingWentWrong => '¡Vaya! Algo no funcionó.';
 }

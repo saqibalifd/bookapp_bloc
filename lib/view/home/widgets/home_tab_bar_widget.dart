@@ -2,18 +2,16 @@ import 'package:bookapp/bloc/book/book_bloc.dart';
 import 'package:bookapp/config/component/loading_widget.dart';
 import 'package:bookapp/config/routes/route_names.dart';
 import 'package:bookapp/data/response/status.dart';
+import 'package:bookapp/models/categories/categoriesModel.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
+import 'package:bookapp/utils/extensions/network_image_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeTabBarWidget extends StatefulWidget {
-  final List<String> categoriesList;
-  // final List<Map<String, dynamic>> bookList;
-  const HomeTabBarWidget({
-    super.key,
-    required this.categoriesList,
-    // required this.bookList,
-  });
+  final List<Category> categoriesList;
+
+  const HomeTabBarWidget({super.key, required this.categoriesList});
 
   @override
   State<HomeTabBarWidget> createState() => _HomeTabBarWidgetState();
@@ -42,14 +40,15 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
             return const Center(child: LoadingWidget());
 
           case Status.error:
-            return Center(child: Text(state.booksList!.message ?? "Error"));
+            return Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                state.booksList!.message ?? "Error",
+              ),
+            );
 
           case Status.completed:
             final books = state.booksList!.data!.data;
-
-            if (books.isEmpty) {
-              return const Center(child: Text("Books list is empty"));
-            }
 
             return Column(
               children: [
@@ -57,25 +56,38 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                   controller: _tabController,
                   isScrollable: true,
                   tabs: widget.categoriesList
-                      .map((category) => Tab(text: category))
+                      .map((category) => Tab(text: category.name))
                       .toList(),
                 ),
+
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
                     children: widget.categoriesList.map((category) {
+                      final filteredBooks = books
+                          .where((book) => book.category == category.name)
+                          .toList();
+
                       final aspectRatio =
                           (context.mediaQueryWidth / 2.4) /
                           (context.mediaQueryHeight * 0.40);
+
+                      if (filteredBooks.isEmpty) {
+                        return const Center(
+                          child: Text("No books in this category"),
+                        );
+                      }
 
                       return GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: aspectRatio,
                         ),
-                        physics: BouncingScrollPhysics(),
-                        itemCount: books.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: filteredBooks.length,
                         itemBuilder: (context, index) {
+                          final book = filteredBooks[index];
+
                           return Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: context.mediaQueryWidth * .03,
@@ -90,22 +102,20 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                    borderRadius: BorderRadiusGeometry.circular(
-                                      20,
-                                    ),
-                                    child: Image.network(
-                                      books[index].thumbnail,
-                                      fit: BoxFit.cover,
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: book.thumbnail.simpleNetworkImage(
                                       height: context.mediaQueryHeight * .3,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
+
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                       vertical: context.mediaQueryHeight * .01,
                                     ),
                                     child: Text(
+                                      book.bookName,
                                       overflow: TextOverflow.ellipsis,
-                                      books[index].bookName,
                                       style: theme.textTheme.titleSmall!
                                           .copyWith(
                                             color: theme.colorScheme.onSurface,
@@ -113,9 +123,10 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                                           ),
                                     ),
                                   ),
+
                                   Text(
+                                    book.authorName,
                                     overflow: TextOverflow.ellipsis,
-                                    books[index].authorName,
                                     style: theme.textTheme.bodyMedium!.copyWith(
                                       fontSize: 12,
                                     ),
@@ -131,12 +142,11 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                 ),
               ],
             );
+
           default:
             return const SizedBox();
         }
       },
     );
-    ///////////////////////
-    // BlocBuilder<BookBloc, BookState>(builder: (context, state) {});
   }
 }

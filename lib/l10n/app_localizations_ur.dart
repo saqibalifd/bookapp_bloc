@@ -145,4 +145,10 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get pleaseEnterGreateSixChar => 'براہ کرم 6 حروف سے زیادہ کا پاس ورڈ درج کریں';
+
+  @override
+  String get categoriesListIsEmpty => 'اوہ! فی الحال زمرہ جات کی فہرست خالی ہے۔';
+
+  @override
+  String get somethingWentWrong => 'اوہ! کچھ صحیح نہیں ہوا۔';
 }

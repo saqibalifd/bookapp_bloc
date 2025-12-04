@@ -7,7 +7,6 @@ class BooksHttpApiRepository implements BooksApiRepository {
 
   @override
   Future<BooksModel> fetchBooks() async {
-    print('hello');
     final response = await _apiServices.getApi(
       '${ApiEndpoints.baseUrl} ${ApiEndpoints.getBooks}',
     );

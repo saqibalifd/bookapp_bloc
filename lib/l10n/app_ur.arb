@@ -44,7 +44,10 @@
     "enterEmail": "ای میل درج کریں",
     "enterPassword": "پاس ورڈ درج کریں",
     "emailIsNotCorrect": "ای میل درست نہیں ہے",
-     "pleaseEnterGreateSixChar": "براہ کرم 6 حروف سے زیادہ کا پاس ورڈ درج کریں"
+    "pleaseEnterGreateSixChar": "براہ کرم 6 حروف سے زیادہ کا پاس ورڈ درج کریں",
+    "categoriesListIsEmpty":"اوہ! فی الحال زمرہ جات کی فہرست خالی ہے۔",
+    "somethingWentWrong":"اوہ! کچھ صحیح نہیں ہوا۔"
+
 
 
 
