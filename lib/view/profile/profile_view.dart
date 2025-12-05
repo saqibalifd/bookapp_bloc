@@ -1,6 +1,6 @@
 import 'package:bookapp/bloc/logout/logout_bloc.dart';
-import 'package:bookapp/bloc/user/user_bloc.dart';
-import 'package:bookapp/config/component/floating_color_component.dart';
+import 'package:bookapp/config/component/components.dart';
+import 'package:bookapp/cubit/local_user/local_user_cubit.dart';
 import 'package:bookapp/dependencies_injection/dependencies_injection.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:bookapp/view/profile/widgets/widgets.dart';
@@ -19,15 +19,15 @@ class _ProfileViewState extends State<ProfileView> {
   final TextEditingController aboutController = TextEditingController();
 
   late LogoutBloc _logoutBloc;
-  late UserBloc _userBloc;
-
+  late LocalUserCubit _localUserCubit;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // emailController.text = user!.user!.email;
+    // aboutController.text = user!.user!.phone;
     _logoutBloc = LogoutBloc(getIt());
-    _userBloc = UserBloc(userApiRepository: getIt());
-    _userBloc.add(FetchUser());
+    _localUserCubit = LocalUserCubit();
+    _localUserCubit.loadUser();
   }
 
   @override
@@ -35,7 +35,6 @@ class _ProfileViewState extends State<ProfileView> {
     // TODO: implement dispose
     super.dispose();
     _logoutBloc.close();
-    _userBloc.close();
   }
 
   @override
@@ -48,28 +47,43 @@ class _ProfileViewState extends State<ProfileView> {
         ),
 
         body: BlocProvider(
-          create: (context) => _userBloc,
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.mediaQueryHeight * .03,
-              ),
-              child: Column(
-                children: [
-                  20.height,
-                  ProfileImageNameWidget(),
-                  10.height,
-                  ProfileEmailFieldWidget(emailController: emailController),
-                  10.height,
-                  ProfileAboutFieldWidget(aboutcontroller: aboutController),
-                  30.height,
-                  BlocProvider(
-                    create: (context) => _logoutBloc,
-                    child: LogoutButtonWidget(),
+          create: (context) => _localUserCubit,
+          child: BlocProvider(
+            create: (context) => _logoutBloc,
+            child: BlocBuilder<LocalUserCubit, LocalUserState>(
+              builder: (context, state) {
+                final user = state.user;
+                if (user == null || user.user == null) {
+                  return const Center(child: LoadingWidget());
+                }
+                emailController.text = user.user!.email.toString();
+                aboutController.text = user.user!.address!.city.toString();
+
+                return SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.mediaQueryHeight * .03,
+                    ),
+                    child: Column(
+                      children: [
+                        20.height,
+                        ProfileImageNameWidget(),
+                        10.height,
+                        ProfileEmailFieldWidget(
+                          emailController: emailController,
+                        ),
+                        10.height,
+                        ProfileAboutFieldWidget(
+                          aboutcontroller: aboutController,
+                        ),
+                        30.height,
+                        LogoutButtonWidget(),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ),
