@@ -4,9 +4,16 @@ import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ProfileAboutFieldWidget extends StatelessWidget {
-  const ProfileAboutFieldWidget({super.key});
+class ProfileAboutFieldWidget extends StatefulWidget {
+  final TextEditingController aboutcontroller;
+  const ProfileAboutFieldWidget({super.key, required this.aboutcontroller});
 
+  @override
+  State<ProfileAboutFieldWidget> createState() =>
+      _ProfileAboutFieldWidgetState();
+}
+
+class _ProfileAboutFieldWidgetState extends State<ProfileAboutFieldWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -29,6 +36,7 @@ class ProfileAboutFieldWidget extends StatelessWidget {
         ),
         5.height,
         TextField(
+          controller: widget.aboutcontroller,
           minLines: 1,
           maxLines: null,
           keyboardType: TextInputType.multiline,

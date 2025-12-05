@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- UserData get data; SupportData get support;
+ bool get status; String get message; User? get user;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserModelCopyWith<UserModel> get copyWith => _$UserModelCopyWithImpl<UserModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.data, data) || other.data == data)&&(identical(other.support, support) || other.support == support));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,data,support);
+int get hashCode => Object.hash(runtimeType,status,message,user);
 
 @override
 String toString() {
-  return 'UserModel(data: $data, support: $support)';
+  return 'UserModel(status: $status, message: $message, user: $user)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- UserData data, SupportData support
+ bool status, String message, User? user
 });
 
 
-$UserDataCopyWith<$Res> get data;$SupportDataCopyWith<$Res> get support;
+$UserCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -65,30 +65,25 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? support = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = null,Object? user = freezed,}) {
   return _then(_self.copyWith(
-data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UserData,support: null == support ? _self.support : support // ignore: cast_nullable_to_non_nullable
-as SupportData,
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as bool,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as User?,
   ));
 }
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserDataCopyWith<$Res> get data {
-  
-  return $UserDataCopyWith<$Res>(_self.data, (value) {
-    return _then(_self.copyWith(data: value));
-  });
-}/// Create a copy of UserModel
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SupportDataCopyWith<$Res> get support {
-  
-  return $SupportDataCopyWith<$Res>(_self.support, (value) {
-    return _then(_self.copyWith(support: value));
+$UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+    return null;
+  }
+
+  return $UserCopyWith<$Res>(_self.user!, (value) {
+    return _then(_self.copyWith(user: value));
   });
 }
 }
@@ -172,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserData data,  SupportData support)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool status,  String message,  User? user)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
-return $default(_that.data,_that.support);case _:
+return $default(_that.status,_that.message,_that.user);case _:
   return orElse();
 
 }
@@ -193,10 +188,10 @@ return $default(_that.data,_that.support);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserData data,  SupportData support)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool status,  String message,  User? user)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
-return $default(_that.data,_that.support);case _:
+return $default(_that.status,_that.message,_that.user);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -213,10 +208,10 @@ return $default(_that.data,_that.support);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserData data,  SupportData support)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool status,  String message,  User? user)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
-return $default(_that.data,_that.support);case _:
+return $default(_that.status,_that.message,_that.user);case _:
   return null;
 
 }
@@ -228,11 +223,12 @@ return $default(_that.data,_that.support);case _:
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({this.data = const UserData(), this.support = const SupportData()});
+  const _UserModel({this.status = false, this.message = '', this.user});
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
-@override@JsonKey() final  UserData data;
-@override@JsonKey() final  SupportData support;
+@override@JsonKey() final  bool status;
+@override@JsonKey() final  String message;
+@override final  User? user;
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -247,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.data, data) || other.data == data)&&(identical(other.support, support) || other.support == support));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,data,support);
+int get hashCode => Object.hash(runtimeType,status,message,user);
 
 @override
 String toString() {
-  return 'UserModel(data: $data, support: $support)';
+  return 'UserModel(status: $status, message: $message, user: $user)';
 }
 
 
@@ -267,11 +263,11 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- UserData data, SupportData support
+ bool status, String message, User? user
 });
 
 
-@override $UserDataCopyWith<$Res> get data;@override $SupportDataCopyWith<$Res> get support;
+@override $UserCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -284,11 +280,12 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? support = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = null,Object? user = freezed,}) {
   return _then(_UserModel(
-data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as UserData,support: null == support ? _self.support : support // ignore: cast_nullable_to_non_nullable
-as SupportData,
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as bool,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as User?,
   ));
 }
 
@@ -296,93 +293,104 @@ as SupportData,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserDataCopyWith<$Res> get data {
-  
-  return $UserDataCopyWith<$Res>(_self.data, (value) {
-    return _then(_self.copyWith(data: value));
-  });
-}/// Create a copy of UserModel
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SupportDataCopyWith<$Res> get support {
-  
-  return $SupportDataCopyWith<$Res>(_self.support, (value) {
-    return _then(_self.copyWith(support: value));
+$UserCopyWith<$Res>? get user {
+    if (_self.user == null) {
+    return null;
+  }
+
+  return $UserCopyWith<$Res>(_self.user!, (value) {
+    return _then(_self.copyWith(user: value));
   });
 }
 }
 
 
 /// @nodoc
-mixin _$UserData {
+mixin _$User {
 
- int get id; String get email; String get first_name; String get last_name; String get avatar;
-/// Create a copy of UserData
+ String get id; String get name; String get email; String get phone; String get gender;@JsonKey(name: 'profileImage') String get profileImage; String get dateOfBirth; String get joinedAt; String get userType; Address? get address;
+/// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$UserDataCopyWith<UserData> get copyWith => _$UserDataCopyWithImpl<UserData>(this as UserData, _$identity);
+$UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$identity);
 
-  /// Serializes this UserData to a JSON map.
+  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.email, email) || other.email == email)&&(identical(other.first_name, first_name) || other.first_name == first_name)&&(identical(other.last_name, last_name) || other.last_name == last_name)&&(identical(other.avatar, avatar) || other.avatar == avatar));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.joinedAt, joinedAt) || other.joinedAt == joinedAt)&&(identical(other.userType, userType) || other.userType == userType)&&(identical(other.address, address) || other.address == address));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,email,first_name,last_name,avatar);
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,gender,profileImage,dateOfBirth,joinedAt,userType,address);
 
 @override
 String toString() {
-  return 'UserData(id: $id, email: $email, first_name: $first_name, last_name: $last_name, avatar: $avatar)';
+  return 'User(id: $id, name: $name, email: $email, phone: $phone, gender: $gender, profileImage: $profileImage, dateOfBirth: $dateOfBirth, joinedAt: $joinedAt, userType: $userType, address: $address)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $UserDataCopyWith<$Res>  {
-  factory $UserDataCopyWith(UserData value, $Res Function(UserData) _then) = _$UserDataCopyWithImpl;
+abstract mixin class $UserCopyWith<$Res>  {
+  factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- int id, String email, String first_name, String last_name, String avatar
+ String id, String name, String email, String phone, String gender,@JsonKey(name: 'profileImage') String profileImage, String dateOfBirth, String joinedAt, String userType, Address? address
 });
 
 
-
+$AddressCopyWith<$Res>? get address;
 
 }
 /// @nodoc
-class _$UserDataCopyWithImpl<$Res>
-    implements $UserDataCopyWith<$Res> {
-  _$UserDataCopyWithImpl(this._self, this._then);
+class _$UserCopyWithImpl<$Res>
+    implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._self, this._then);
 
-  final UserData _self;
-  final $Res Function(UserData) _then;
+  final User _self;
+  final $Res Function(User) _then;
 
-/// Create a copy of UserData
+/// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? email = null,Object? first_name = null,Object? last_name = null,Object? avatar = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? email = null,Object? phone = null,Object? gender = null,Object? profileImage = null,Object? dateOfBirth = null,Object? joinedAt = null,Object? userType = null,Object? address = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,first_name: null == first_name ? _self.first_name : first_name // ignore: cast_nullable_to_non_nullable
-as String,last_name: null == last_name ? _self.last_name : last_name // ignore: cast_nullable_to_non_nullable
-as String,avatar: null == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String,
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String,joinedAt: null == joinedAt ? _self.joinedAt : joinedAt // ignore: cast_nullable_to_non_nullable
+as String,userType: null == userType ? _self.userType : userType // ignore: cast_nullable_to_non_nullable
+as String,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as Address?,
   ));
 }
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res>? get address {
+    if (_self.address == null) {
+    return null;
+  }
 
+  return $AddressCopyWith<$Res>(_self.address!, (value) {
+    return _then(_self.copyWith(address: value));
+  });
+}
 }
 
 
-/// Adds pattern-matching-related methods to [UserData].
-extension UserDataPatterns on UserData {
+/// Adds pattern-matching-related methods to [User].
+extension UserPatterns on User {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -395,10 +403,10 @@ extension UserDataPatterns on UserData {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _UserData value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _User value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _UserData() when $default != null:
+case _User() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -417,10 +425,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _UserData value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _User value)  $default,){
 final _that = this;
 switch (_that) {
-case _UserData():
+case _User():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -438,10 +446,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _UserData value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _User value)?  $default,){
 final _that = this;
 switch (_that) {
-case _UserData() when $default != null:
+case _User() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -459,10 +467,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String email,  String first_name,  String last_name,  String avatar)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String phone,  String gender, @JsonKey(name: 'profileImage')  String profileImage,  String dateOfBirth,  String joinedAt,  String userType,  Address? address)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _UserData() when $default != null:
-return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avatar);case _:
+case _User() when $default != null:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.gender,_that.profileImage,_that.dateOfBirth,_that.joinedAt,_that.userType,_that.address);case _:
   return orElse();
 
 }
@@ -480,10 +488,10 @@ return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String email,  String first_name,  String last_name,  String avatar)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String email,  String phone,  String gender, @JsonKey(name: 'profileImage')  String profileImage,  String dateOfBirth,  String joinedAt,  String userType,  Address? address)  $default,) {final _that = this;
 switch (_that) {
-case _UserData():
-return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avatar);case _:
+case _User():
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.gender,_that.profileImage,_that.dateOfBirth,_that.joinedAt,_that.userType,_that.address);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -500,10 +508,10 @@ return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String email,  String first_name,  String last_name,  String avatar)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String email,  String phone,  String gender, @JsonKey(name: 'profileImage')  String profileImage,  String dateOfBirth,  String joinedAt,  String userType,  Address? address)?  $default,) {final _that = this;
 switch (_that) {
-case _UserData() when $default != null:
-return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avatar);case _:
+case _User() when $default != null:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.gender,_that.profileImage,_that.dateOfBirth,_that.joinedAt,_that.userType,_that.address);case _:
   return null;
 
 }
@@ -514,118 +522,140 @@ return $default(_that.id,_that.email,_that.first_name,_that.last_name,_that.avat
 /// @nodoc
 @JsonSerializable()
 
-class _UserData implements UserData {
-  const _UserData({this.id = 0, this.email = '', this.first_name = '', this.last_name = '', this.avatar = ''});
-  factory _UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
+class _User implements User {
+  const _User({this.id = '', this.name = '', this.email = '', this.phone = '', this.gender = '', @JsonKey(name: 'profileImage') this.profileImage = '', this.dateOfBirth = '', this.joinedAt = '', this.userType = '', this.address});
+  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-@override@JsonKey() final  int id;
+@override@JsonKey() final  String id;
+@override@JsonKey() final  String name;
 @override@JsonKey() final  String email;
-@override@JsonKey() final  String first_name;
-@override@JsonKey() final  String last_name;
-@override@JsonKey() final  String avatar;
+@override@JsonKey() final  String phone;
+@override@JsonKey() final  String gender;
+@override@JsonKey(name: 'profileImage') final  String profileImage;
+@override@JsonKey() final  String dateOfBirth;
+@override@JsonKey() final  String joinedAt;
+@override@JsonKey() final  String userType;
+@override final  Address? address;
 
-/// Create a copy of UserData
+/// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$UserDataCopyWith<_UserData> get copyWith => __$UserDataCopyWithImpl<_UserData>(this, _$identity);
+_$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$UserDataToJson(this, );
+  return _$UserToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserData&&(identical(other.id, id) || other.id == id)&&(identical(other.email, email) || other.email == email)&&(identical(other.first_name, first_name) || other.first_name == first_name)&&(identical(other.last_name, last_name) || other.last_name == last_name)&&(identical(other.avatar, avatar) || other.avatar == avatar));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.joinedAt, joinedAt) || other.joinedAt == joinedAt)&&(identical(other.userType, userType) || other.userType == userType)&&(identical(other.address, address) || other.address == address));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,email,first_name,last_name,avatar);
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,gender,profileImage,dateOfBirth,joinedAt,userType,address);
 
 @override
 String toString() {
-  return 'UserData(id: $id, email: $email, first_name: $first_name, last_name: $last_name, avatar: $avatar)';
+  return 'User(id: $id, name: $name, email: $email, phone: $phone, gender: $gender, profileImage: $profileImage, dateOfBirth: $dateOfBirth, joinedAt: $joinedAt, userType: $userType, address: $address)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
-  factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) _then) = __$UserDataCopyWithImpl;
+abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String email, String first_name, String last_name, String avatar
+ String id, String name, String email, String phone, String gender,@JsonKey(name: 'profileImage') String profileImage, String dateOfBirth, String joinedAt, String userType, Address? address
 });
 
 
-
+@override $AddressCopyWith<$Res>? get address;
 
 }
 /// @nodoc
-class __$UserDataCopyWithImpl<$Res>
-    implements _$UserDataCopyWith<$Res> {
-  __$UserDataCopyWithImpl(this._self, this._then);
+class __$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
 
-  final _UserData _self;
-  final $Res Function(_UserData) _then;
+  final _User _self;
+  final $Res Function(_User) _then;
 
-/// Create a copy of UserData
+/// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? email = null,Object? first_name = null,Object? last_name = null,Object? avatar = null,}) {
-  return _then(_UserData(
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? email = null,Object? phone = null,Object? gender = null,Object? profileImage = null,Object? dateOfBirth = null,Object? joinedAt = null,Object? userType = null,Object? address = freezed,}) {
+  return _then(_User(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,first_name: null == first_name ? _self.first_name : first_name // ignore: cast_nullable_to_non_nullable
-as String,last_name: null == last_name ? _self.last_name : last_name // ignore: cast_nullable_to_non_nullable
-as String,avatar: null == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String,
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,profileImage: null == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
+as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
+as String,joinedAt: null == joinedAt ? _self.joinedAt : joinedAt // ignore: cast_nullable_to_non_nullable
+as String,userType: null == userType ? _self.userType : userType // ignore: cast_nullable_to_non_nullable
+as String,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as Address?,
   ));
 }
 
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AddressCopyWith<$Res>? get address {
+    if (_self.address == null) {
+    return null;
+  }
 
+  return $AddressCopyWith<$Res>(_self.address!, (value) {
+    return _then(_self.copyWith(address: value));
+  });
+}
 }
 
 
 /// @nodoc
-mixin _$SupportData {
+mixin _$Address {
 
- String get url; String get text;
-/// Create a copy of SupportData
+ String get city; String get country;
+/// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SupportDataCopyWith<SupportData> get copyWith => _$SupportDataCopyWithImpl<SupportData>(this as SupportData, _$identity);
+$AddressCopyWith<Address> get copyWith => _$AddressCopyWithImpl<Address>(this as Address, _$identity);
 
-  /// Serializes this SupportData to a JSON map.
+  /// Serializes this Address to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SupportData&&(identical(other.url, url) || other.url == url)&&(identical(other.text, text) || other.text == text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Address&&(identical(other.city, city) || other.city == city)&&(identical(other.country, country) || other.country == country));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,url,text);
+int get hashCode => Object.hash(runtimeType,city,country);
 
 @override
 String toString() {
-  return 'SupportData(url: $url, text: $text)';
+  return 'Address(city: $city, country: $country)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SupportDataCopyWith<$Res>  {
-  factory $SupportDataCopyWith(SupportData value, $Res Function(SupportData) _then) = _$SupportDataCopyWithImpl;
+abstract mixin class $AddressCopyWith<$Res>  {
+  factory $AddressCopyWith(Address value, $Res Function(Address) _then) = _$AddressCopyWithImpl;
 @useResult
 $Res call({
- String url, String text
+ String city, String country
 });
 
 
@@ -633,19 +663,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$SupportDataCopyWithImpl<$Res>
-    implements $SupportDataCopyWith<$Res> {
-  _$SupportDataCopyWithImpl(this._self, this._then);
+class _$AddressCopyWithImpl<$Res>
+    implements $AddressCopyWith<$Res> {
+  _$AddressCopyWithImpl(this._self, this._then);
 
-  final SupportData _self;
-  final $Res Function(SupportData) _then;
+  final Address _self;
+  final $Res Function(Address) _then;
 
-/// Create a copy of SupportData
+/// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? text = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? city = null,Object? country = null,}) {
   return _then(_self.copyWith(
-url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -653,8 +683,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [SupportData].
-extension SupportDataPatterns on SupportData {
+/// Adds pattern-matching-related methods to [Address].
+extension AddressPatterns on Address {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -667,10 +697,10 @@ extension SupportDataPatterns on SupportData {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SupportData value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Address value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SupportData() when $default != null:
+case _Address() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -689,10 +719,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SupportData value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Address value)  $default,){
 final _that = this;
 switch (_that) {
-case _SupportData():
+case _Address():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -710,10 +740,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SupportData value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Address value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SupportData() when $default != null:
+case _Address() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -731,10 +761,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String url,  String text)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String city,  String country)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SupportData() when $default != null:
-return $default(_that.url,_that.text);case _:
+case _Address() when $default != null:
+return $default(_that.city,_that.country);case _:
   return orElse();
 
 }
@@ -752,10 +782,10 @@ return $default(_that.url,_that.text);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String url,  String text)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String city,  String country)  $default,) {final _that = this;
 switch (_that) {
-case _SupportData():
-return $default(_that.url,_that.text);case _:
+case _Address():
+return $default(_that.city,_that.country);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -772,10 +802,10 @@ return $default(_that.url,_that.text);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String url,  String text)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String city,  String country)?  $default,) {final _that = this;
 switch (_that) {
-case _SupportData() when $default != null:
-return $default(_that.url,_that.text);case _:
+case _Address() when $default != null:
+return $default(_that.city,_that.country);case _:
   return null;
 
 }
@@ -786,47 +816,47 @@ return $default(_that.url,_that.text);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SupportData implements SupportData {
-  const _SupportData({this.url = '', this.text = ''});
-  factory _SupportData.fromJson(Map<String, dynamic> json) => _$SupportDataFromJson(json);
+class _Address implements Address {
+  const _Address({this.city = '', this.country = ''});
+  factory _Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
 
-@override@JsonKey() final  String url;
-@override@JsonKey() final  String text;
+@override@JsonKey() final  String city;
+@override@JsonKey() final  String country;
 
-/// Create a copy of SupportData
+/// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SupportDataCopyWith<_SupportData> get copyWith => __$SupportDataCopyWithImpl<_SupportData>(this, _$identity);
+_$AddressCopyWith<_Address> get copyWith => __$AddressCopyWithImpl<_Address>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SupportDataToJson(this, );
+  return _$AddressToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SupportData&&(identical(other.url, url) || other.url == url)&&(identical(other.text, text) || other.text == text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Address&&(identical(other.city, city) || other.city == city)&&(identical(other.country, country) || other.country == country));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,url,text);
+int get hashCode => Object.hash(runtimeType,city,country);
 
 @override
 String toString() {
-  return 'SupportData(url: $url, text: $text)';
+  return 'Address(city: $city, country: $country)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SupportDataCopyWith<$Res> implements $SupportDataCopyWith<$Res> {
-  factory _$SupportDataCopyWith(_SupportData value, $Res Function(_SupportData) _then) = __$SupportDataCopyWithImpl;
+abstract mixin class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
+  factory _$AddressCopyWith(_Address value, $Res Function(_Address) _then) = __$AddressCopyWithImpl;
 @override @useResult
 $Res call({
- String url, String text
+ String city, String country
 });
 
 
@@ -834,19 +864,19 @@ $Res call({
 
 }
 /// @nodoc
-class __$SupportDataCopyWithImpl<$Res>
-    implements _$SupportDataCopyWith<$Res> {
-  __$SupportDataCopyWithImpl(this._self, this._then);
+class __$AddressCopyWithImpl<$Res>
+    implements _$AddressCopyWith<$Res> {
+  __$AddressCopyWithImpl(this._self, this._then);
 
-  final _SupportData _self;
-  final $Res Function(_SupportData) _then;
+  final _Address _self;
+  final $Res Function(_Address) _then;
 
-/// Create a copy of SupportData
+/// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? url = null,Object? text = null,}) {
-  return _then(_SupportData(
-url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? city = null,Object? country = null,}) {
+  return _then(_Address(
+city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

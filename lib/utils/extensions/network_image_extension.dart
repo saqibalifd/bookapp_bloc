@@ -34,10 +34,10 @@ extension SimpleNetworkImageExtension on String {
               child: Center(
                 child: Platform.isAndroid
                     ? CircularProgressIndicator(
-                        color: effectivePlaceholderColor,
+                        // color: effectivePlaceholderColor,
                       )
                     : CupertinoActivityIndicator(
-                        color: effectivePlaceholderColor,
+                        // color: effectivePlaceholderColor,
                       ),
               ),
             ),

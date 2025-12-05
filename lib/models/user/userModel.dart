@@ -6,35 +6,40 @@ part 'userModel.g.dart';
 @freezed
 abstract class UserModel with _$UserModel {
   const factory UserModel({
-    @Default(UserData()) UserData data,
-    @Default(SupportData()) SupportData support,
+    @Default(false) bool status,
+    @Default('') String message,
+    User? user,
   }) = _UserModel;
 
-  factory UserModel.fromJson(Map<String, Object?> json) =>
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 }
 
 @freezed
-abstract class UserData with _$UserData {
-  const factory UserData({
-    @Default(0) int id,
+abstract class User with _$User {
+  const factory User({
+    @Default('') String id,
+    @Default('') String name,
     @Default('') String email,
-    @Default('') String first_name,
-    @Default('') String last_name,
-    @Default('') String avatar,
-  }) = _UserData;
+    @Default('') String phone,
+    @Default('') String gender,
+    @JsonKey(name: 'profileImage') @Default('') String profileImage,
+    @Default('') String dateOfBirth,
+    @Default('') String joinedAt,
+    @Default('') String userType,
+    Address? address,
+  }) = _User;
 
-  factory UserData.fromJson(Map<String, Object?> json) =>
-      _$UserDataFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
 @freezed
-abstract class SupportData with _$SupportData {
-  const factory SupportData({
-    @Default('') String url,
-    @Default('') String text,
-  }) = _SupportData;
+abstract class Address with _$Address {
+  const factory Address({
+    @Default('') String city,
+    @Default('') String country,
+  }) = _Address;
 
-  factory SupportData.fromJson(Map<String, Object?> json) =>
-      _$SupportDataFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 }

@@ -6,7 +6,7 @@ class ApiEndpoints {
   static const String reqresLogin = "api/login";
   static const String reqresSignup = "api/register";
 
-  static const String currentUser = "api/users/2";
+  static const String currentUser = "${reqresBAseUrl}api/users/2";
   static const String userProfile = "${baseUrl}auth/userProfile";
   static const String login = "${baseUrl}auth/signIn";
   static const String signup = "${baseUrl}auth/signUp";

@@ -1,6 +1,5 @@
-import 'package:bookapp/bloc/book/book_bloc.dart';
+import 'package:bookapp/bloc/user/user_bloc.dart';
 import 'package:bookapp/config/component/loading_widget.dart';
-import 'package:bookapp/data/network/network_api_service.dart';
 import 'package:bookapp/data/response/status.dart';
 import 'package:bookapp/dependencies_injection/locator.dart';
 import 'package:flutter/material.dart';
@@ -14,19 +13,19 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  late BookBloc _bookBloc;
+  late UserBloc _userBloc;
 
   @override
   void initState() {
     super.initState();
-    _bookBloc = BookBloc(booksApiRepository: getIt());
-    _bookBloc.add(BooksFetch());
+    _userBloc = UserBloc(userApiRepository: getIt());
+    _userBloc.add(FetchUser());
   }
 
   @override
   void dispose() {
-    _bookBloc.close();
     super.dispose();
+    _userBloc.close();
   }
 
   @override
@@ -37,47 +36,41 @@ class _TestScreenState extends State<TestScreen> {
         centerTitle: true,
         backgroundColor: Colors.blue,
         actions: [
-          IconButton(
-            onPressed: () async {
-              NetworkApiService networkApiService = NetworkApiService();
-              final response = await networkApiService.getApi(
-                'https://675c38dc-686a-4ae9-86a0-3fdeeec97f93.mock.pstmn.io/books',
-              );
-
-              print(response);
-            },
-            icon: Icon(Icons.refresh),
-          ),
+          IconButton(onPressed: () async {}, icon: Icon(Icons.refresh)),
         ],
       ),
       body: BlocProvider(
-        create: (_) => _bookBloc,
-        child: BlocBuilder<BookBloc, BookState>(
+        create: (_) => _userBloc,
+        child: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
-            switch (state.booksList!.status) {
+            print('*********');
+            print(state.user!.data);
+
+            switch (state.user!.status) {
               case Status.loading:
                 return const Center(child: LoadingWidget());
 
               case Status.error:
-                return Center(child: Text(state.booksList!.message ?? "Error"));
+                return Center(child: Text(state.user!.message ?? "Error"));
 
               case Status.completed:
-                final books = state.booksList!.data!.data;
+                // final user = state.user!.data!.user!;
 
-                if (books.isEmpty) {
-                  return const Center(child: Text("Books list is empty"));
+                if (state.user!.data == null) {
+                  return const Center(child: Text("User Not found"));
                 }
 
-                return ListView.builder(
-                  itemCount: books.length,
-                  itemBuilder: (_, i) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(books[i].thumbnail),
+                return Center(
+                  child: ListTile(
+                    // leading: CircleAvatar(
+                    //   backgroundImage: NetworkImage(user.profileImage ?? ''),
+                    // ),
+                    title: Text(
+                      textAlign: TextAlign.center,
+                      state.user?.data?.user?.name.toString() ?? 'data is null',
                     ),
-                    title: Text(books[i].bookName),
                   ),
                 );
-
               default:
                 return const SizedBox();
             }

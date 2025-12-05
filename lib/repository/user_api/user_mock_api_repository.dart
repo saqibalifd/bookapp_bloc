@@ -7,17 +7,20 @@ class UserMockApiRepository implements UserApiRepository {
     await Future.delayed(const Duration(seconds: 3));
 
     dynamic responseData = {
-      "data": {
-        "id": 2,
-        "email": "janet.weaver@reqres.in",
-        "first_name": "Janet",
-        "last_name": "Weaver",
-        "avatar": "https://reqres.in/img/faces/2-image.jpg",
-      },
-      "support": {
-        "url":
-            "<a href=https://reqres.in/#support-heading>https://reqres.in/#support-heading</a>",
-        "text": "To keep ReqRes free, contributions are appreciated!",
+      "status": true,
+      "message": "User information fetched successfully.",
+      "user": {
+        "id": "user_001",
+        "name": "Mubeen Ali",
+        "email": "mubeen@example.com",
+        "phone": "+923001234567",
+        "gender": "Male",
+        "profileImage":
+            "https://cdn.vectorstock.com/i/500p/29/52/faceless-male-avatar-in-hoodie-vector-56412952.jpg",
+        "dateOfBirth": "2007-05-1",
+        "joinedAt": "2024-06-21T12:30:00Z",
+        "userType": "customer",
+        "address": {"city": "Panjab", "country": "Pakistan"},
       },
     };
 

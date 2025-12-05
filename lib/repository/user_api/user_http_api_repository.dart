@@ -8,7 +8,8 @@ class UserHttpApiRepository implements UserApiRepository {
   @override
   Future<UserModel> fetchUser() async {
     final response = await _apiServices.getApi(
-      '${ApiEndpoints.reqresBAseUrl} ${ApiEndpoints.currentUser}',
+      ApiEndpoints.userProfile,
+      headers: {'x-api-key': 'reqres-free-v1'},
     );
 
     return UserModel.fromJson(response);

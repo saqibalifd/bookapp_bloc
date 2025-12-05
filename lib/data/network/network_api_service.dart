@@ -10,13 +10,13 @@ import '../exception/app_exceptions.dart';
 class NetworkApiService implements BaseApiServices {
   /// Sends a GET request
   @override
-  Future<dynamic> getApi(String url) async {
+  Future<dynamic> getApi(String url, {Map<String, String>? headers}) async {
     if (kDebugMode) print('GET: $url');
 
     dynamic responseJson;
     try {
       final response = await http
-          .get(Uri.parse(url))
+          .get(Uri.parse(url), headers: headers)
           .timeout(const Duration(seconds: 20));
 
       responseJson = returnResponse(response);
@@ -60,7 +60,7 @@ class NetworkApiService implements BaseApiServices {
   }
 
   /// Sends a PUT request
-     @override
+  @override
   Future<dynamic> putApi(String url, dynamic data) async {
     if (kDebugMode) {
       print('PUT: $url');
@@ -92,18 +92,14 @@ class NetworkApiService implements BaseApiServices {
   }
 
   /// Sends a DELETE request
-       @override
-
+  @override
   Future<dynamic> deleteApi(String url) async {
     if (kDebugMode) print('DELETE: $url');
 
     dynamic responseJson;
     try {
       final response = await http
-          .delete(
-            Uri.parse(url),
-            headers: {'x-api-key': 'reqres-free-v1'},
-          )
+          .delete(Uri.parse(url), headers: {'x-api-key': 'reqres-free-v1'})
           .timeout(const Duration(seconds: 10));
 
       responseJson = returnResponse(response);
