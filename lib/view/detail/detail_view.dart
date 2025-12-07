@@ -64,7 +64,10 @@ class DetailView extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [DetailPreviewButton(), DetailFavouriteButton()],
+            children: [
+              DetailPreviewButton(bookData: bookData),
+              DetailFavouriteButton(),
+            ],
           ),
         ),
       ),

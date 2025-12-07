@@ -40,8 +40,9 @@ class Routes {
           builder: (BuildContext context) => FavouriteView(),
         );
       case RoutesName.preview:
+        final book = settings.arguments as BookData;
         return MaterialPageRoute(
-          builder: (BuildContext context) => PreviewView(),
+          builder: (BuildContext context) => PreviewView(bookData: book),
         );
       case RoutesName.profile:
         return MaterialPageRoute(
