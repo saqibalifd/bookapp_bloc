@@ -1,4 +1,5 @@
 import 'package:bookapp/config/routes/route_names.dart';
+import 'package:bookapp/models/books/booksModel.dart';
 import 'package:flutter/material.dart';
 
 import '../../view/view.dart';
@@ -30,8 +31,9 @@ class Routes {
       case RoutesName.home:
         return MaterialPageRoute(builder: (BuildContext context) => HomeView());
       case RoutesName.detail:
+        final book = settings.arguments as BookData;
         return MaterialPageRoute(
-          builder: (BuildContext context) => DetailView(),
+          builder: (BuildContext context) => DetailView(bookData: book),
         );
       case RoutesName.favourite:
         return MaterialPageRoute(

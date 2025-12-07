@@ -2,6 +2,7 @@ import 'package:bookapp/bloc/book/book_bloc.dart';
 import 'package:bookapp/config/component/loading_widget.dart';
 import 'package:bookapp/config/routes/route_names.dart';
 import 'package:bookapp/data/response/status.dart';
+import 'package:bookapp/models/books/booksModel.dart';
 import 'package:bookapp/models/categories/categoriesModel.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:bookapp/utils/extensions/network_image_extension.dart';
@@ -94,10 +95,13 @@ class _HomeTabBarWidgetState extends State<HomeTabBarWidget>
                               vertical: context.mediaQueryHeight * .027,
                             ),
                             child: GestureDetector(
-                              onTap: () => Navigator.pushNamed(
-                                context,
-                                RoutesName.detail,
-                              ),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutesName.detail,
+                                  arguments: book,
+                                );
+                              },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

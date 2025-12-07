@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -76,8 +76,7 @@ class _HomeViewState extends State<HomeView> {
                         loc.whatDoYouWantToRead,
                         style: theme.textTheme.headlineLarge,
                       ),
-                      20.height,
-                      HomeSearchFieldWidget(),
+
                       20.height,
                       Expanded(
                         child: BlocBuilder<CatogoriesBloc, CategoriesState>(
@@ -104,11 +103,6 @@ class _HomeViewState extends State<HomeView> {
                                 }
                                 return HomeTabBarWidget(
                                   categoriesList: categories,
-                                );
-
-                              default:
-                                return Center(
-                                  child: Text(loc.somethingWentWrong),
                                 );
                             }
                           },

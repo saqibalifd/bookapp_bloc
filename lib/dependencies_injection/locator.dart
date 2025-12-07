@@ -3,6 +3,8 @@ import 'package:bookapp/repository/auth_api/auth_http_api_repository.dart';
 import 'package:bookapp/repository/books_api/books_repository.dart';
 import 'package:bookapp/repository/categories_api/categories_api_repository.dart';
 import 'package:bookapp/repository/categories_api/categories_mock_api_repository.dart';
+import 'package:bookapp/repository/favourite_api/favourite_api_repository.dart';
+import 'package:bookapp/repository/favourite_api/favourite_mock_api_repository.dart';
 import 'package:bookapp/repository/user_api/user_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,6 +23,9 @@ class ServiceLocator {
     );
     getIt.registerLazySingleton<UserApiRepository>(
       () => UserHttpApiRepository(),
+    );
+    getIt.registerLazySingleton<FavouriteApiRepository>(
+      () => FavouriteMockApiRepository(),
     );
   }
 }
