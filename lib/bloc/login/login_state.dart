@@ -1,28 +1,28 @@
 part of 'login_bloc.dart';
 
-abstract class LoginState extends Equatable {
+class LoginStates extends Equatable {
+  const LoginStates({
+    this.email = '',
+    this.password = '',
+    this.loginApi = const ApiResponse.completed(''),
+  });
+
+  final String email;
+  final String password;
+  final ApiResponse<String> loginApi;
+
+  LoginStates copyWith({
+    String? email,
+    String? password,
+    ApiResponse<String>? loginApi,
+  }) {
+    return LoginStates(
+      email: email ?? this.email,
+      password: password ?? this.password,
+      loginApi: loginApi ?? this.loginApi,
+    );
+  }
+
   @override
-  List<Object?> get props => [];
-}
-
-class LoginInitial extends LoginState {}
-
-class LoginLoading extends LoginState {}
-
-class LoginSuccess extends LoginState {
-  final LoginModel user;
-
-  LoginSuccess(this.user);
-
-  @override
-  List<Object?> get props => [user];
-}
-
-class LoginError extends LoginState {
-  final String message;
-
-  LoginError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  List<Object> get props => [email, password, loginApi];
 }
