@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookapp/services/session_manager/session_controller.dart';
 import 'package:equatable/equatable.dart';
-import '../../models/login/loginModel.dart';
 import '../../repository/auth_api/auth_api_repository.dart';
 part 'login_event.dart';
 part 'login_state.dart';

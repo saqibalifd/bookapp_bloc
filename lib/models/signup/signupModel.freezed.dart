@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignupModel {
 
- int get id; String get token;
+ int get id; String get token; String get error;
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SignupModelCopyWith<SignupModel> get copyWith => _$SignupModelCopyWithImpl<Sign
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupModel&&(identical(other.id, id) || other.id == id)&&(identical(other.token, token) || other.token == token));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupModel&&(identical(other.id, id) || other.id == id)&&(identical(other.token, token) || other.token == token)&&(identical(other.error, error) || other.error == error));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,token);
+int get hashCode => Object.hash(runtimeType,id,token,error);
 
 @override
 String toString() {
-  return 'SignupModel(id: $id, token: $token)';
+  return 'SignupModel(id: $id, token: $token, error: $error)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SignupModelCopyWith<$Res>  {
   factory $SignupModelCopyWith(SignupModel value, $Res Function(SignupModel) _then) = _$SignupModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String token
+ int id, String token, String error
 });
 
 
@@ -65,10 +65,11 @@ class _$SignupModelCopyWithImpl<$Res>
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? token = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? token = null,Object? error = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String token)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String token,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
-return $default(_that.id,_that.token);case _:
+return $default(_that.id,_that.token,_that.error);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.id,_that.token);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String token)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String token,  String error)  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel():
-return $default(_that.id,_that.token);case _:
+return $default(_that.id,_that.token,_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.id,_that.token);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String token)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String token,  String error)?  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
-return $default(_that.id,_that.token);case _:
+return $default(_that.id,_that.token,_that.error);case _:
   return null;
 
 }
@@ -210,11 +211,12 @@ return $default(_that.id,_that.token);case _:
 @JsonSerializable()
 
 class _SignupModel implements SignupModel {
-  const _SignupModel({required this.id, required this.token});
+  const _SignupModel({this.id = 0, this.token = '', this.error = ''});
   factory _SignupModel.fromJson(Map<String, dynamic> json) => _$SignupModelFromJson(json);
 
-@override final  int id;
-@override final  String token;
+@override@JsonKey() final  int id;
+@override@JsonKey() final  String token;
+@override@JsonKey() final  String error;
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupModel&&(identical(other.id, id) || other.id == id)&&(identical(other.token, token) || other.token == token));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupModel&&(identical(other.id, id) || other.id == id)&&(identical(other.token, token) || other.token == token)&&(identical(other.error, error) || other.error == error));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,token);
+int get hashCode => Object.hash(runtimeType,id,token,error);
 
 @override
 String toString() {
-  return 'SignupModel(id: $id, token: $token)';
+  return 'SignupModel(id: $id, token: $token, error: $error)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$SignupModelCopyWith<$Res> implements $SignupModelCopyWith
   factory _$SignupModelCopyWith(_SignupModel value, $Res Function(_SignupModel) _then) = __$SignupModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String token
+ int id, String token, String error
 });
 
 
@@ -266,10 +268,11 @@ class __$SignupModelCopyWithImpl<$Res>
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? token = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? token = null,Object? error = null,}) {
   return _then(_SignupModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

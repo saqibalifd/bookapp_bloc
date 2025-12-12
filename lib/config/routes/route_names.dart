@@ -14,4 +14,5 @@ class RoutesName {
   static const String detail = 'detail_view';
   static const String profile = 'profile_view';
   //testing
+  static const String test = 'test_view';
 }

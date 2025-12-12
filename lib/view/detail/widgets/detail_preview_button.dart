@@ -1,11 +1,13 @@
 import 'package:bookapp/config/component/main_button_component.dart';
 import 'package:bookapp/config/routes/route_names.dart';
 import 'package:bookapp/l10n/app_localizations.dart';
+import 'package:bookapp/models/books/booksModel.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:flutter/material.dart';
 
 class DetailPreviewButton extends StatelessWidget {
-  const DetailPreviewButton({super.key});
+  final BookData bookData;
+  const DetailPreviewButton({super.key, required this.bookData});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class DetailPreviewButton extends StatelessWidget {
 
     return MainButtonComponent(
       onPressed: () {
-        Navigator.pushNamed(context, RoutesName.preview);
+        Navigator.pushNamed(context, RoutesName.preview, arguments: bookData);
       },
       name: loc.readPreviews,
       minWidth: context.mediaQueryWidth * .01,

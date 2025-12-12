@@ -348,6 +348,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About'**
   String get about;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter email'**
+  String get enterEmail;
+
+  /// No description provided for @enterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter password'**
+  String get enterPassword;
+
+  /// No description provided for @emailIsNotCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is not correct'**
+  String get emailIsNotCorrect;
+
+  /// No description provided for @pleaseEnterGreateSixChar.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter password greater than 6 char'**
+  String get pleaseEnterGreateSixChar;
+
+  /// No description provided for @categoriesListIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! The categories list is currently empty'**
+  String get categoriesListIsEmpty;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! Something didn’t work.'**
+  String get somethingWentWrong;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

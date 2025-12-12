@@ -1,6 +1,6 @@
 import 'package:bookapp/config/component/components.dart';
-import 'package:bookapp/config/routes/route_names.dart';
 import 'package:bookapp/l10n/app_localizations.dart';
+import 'package:bookapp/services/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class GoogleLoginButtonWidget extends StatelessWidget {
@@ -11,8 +11,10 @@ class GoogleLoginButtonWidget extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     return GoogleButtonComponent(
-      onPressed: () {
-        Navigator.pushNamed(context, RoutesName.home);
+      onPressed: ()async {
+        final storage = LocalStorage();
+    final token = await storage.readValue('token');
+    print('heheheheheheheheh$token');
       },
       name: loc.signInWithGoogle,
     );

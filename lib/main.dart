@@ -9,11 +9,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'config/theme/themes.dart';
 
-
 ServiceLocator dependencyInjector = ServiceLocator();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   dependencyInjector.servicesLocator();
   runApp(BlocProvider(create: (context) => ThemeCubit(), child: const MyApp()));
 }

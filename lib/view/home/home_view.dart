@@ -1,68 +1,47 @@
+import 'package:bookapp/bloc/book/book_bloc.dart';
+import 'package:bookapp/bloc/user/user_bloc.dart';
 import 'package:bookapp/config/component/components.dart';
+import 'package:bookapp/data/response/response.dart';
+import 'package:bookapp/dependencies_injection/locator.dart';
 import 'package:bookapp/l10n/app_localizations.dart';
+import 'package:bookapp/models/categories/categoriesModel.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:bookapp/view/home/widgets/widgets.dart';
+import 'package:bookapp/bloc/categories/catogories_bloc.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeView extends StatelessWidget {
-  HomeView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
-  final List<String> categoriesList = [
-    'Novel',
-    'Stories',
-    'School',
-    'Novel',
-    'Stories',
-    'School',
-  ];
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
 
-  final List<Map<String, dynamic>> bookList = [
-    {
-      'thumbnail':
-          'https://images-na.ssl-images-amazon.com/images/I/81bsw6fnUiL.jpg',
-      'name': 'Atomic Habits',
-      'author': 'James Clear',
-      'aboutAuthor':
-          'James Clear is a writer and speaker focused on habits, decision making, and continuous improvement.',
-      'overview':
-          'A practical guide to building good habits and breaking bad ones through small, consistent changes that compound over time.',
-      'price': '15.99',
-    },
-    {
-      'thumbnail':
-          'https://images-na.ssl-images-amazon.com/images/I/71aFt4+OTOL.jpg',
-      'name': 'The Alchemist',
-      'author': 'Paulo Coelho',
-      'aboutAuthor':
-          'Paulo Coelho is a Brazilian lyricist and novelist, best known for his novel *The Alchemist*, which has sold millions of copies worldwide.',
-      'overview':
-          'A story about Santiago, an Andalusian shepherd, who dreams of finding treasure and learns about the importance of following one’s dreams.',
-      'price': '12.49',
-    },
-    {
-      'thumbnail':
-          'https://images-na.ssl-images-amazon.com/images/I/81vpsIs58WL.jpg',
-      'name': 'Rich Dad Poor Dad',
-      'author': 'Robert T. Kiyosaki',
-      'aboutAuthor':
-          'Robert T. Kiyosaki is an entrepreneur, educator, and investor who is best known for challenging conventional views about money.',
-      'overview':
-          'A personal finance classic that contrasts the financial philosophies of two fathers—one rich and one poor—and teaches principles for building wealth.',
-      'price': '10.99',
-    },
-    {
-      'thumbnail':
-          'https://images-na.ssl-images-amazon.com/images/I/81eB+7+CkUL.jpg',
-      'name': 'The Subtle Art of Not Giving a F*ck',
-      'author': 'Mark Manson',
-      'aboutAuthor':
-          'Mark Manson is a blogger and bestselling author who writes about self-help, personal development, and life advice with humor and honesty.',
-      'overview':
-          'A counterintuitive approach to living a better life by focusing on what truly matters and letting go of superficial concerns.',
-      'price': '14.29',
-    },
-  ];
+class _HomeViewState extends State<HomeView> {
+  late BookBloc _bookBloc;
+  late CatogoriesBloc _catogoriesBloc;
+  late UserBloc _userBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bookBloc = BookBloc(booksApiRepository: getIt());
+    _catogoriesBloc = CatogoriesBloc(categoriesApiRepository: getIt());
+    _userBloc = UserBloc(userApiRepository: getIt());
+    _bookBloc.add(BooksFetch());
+    _catogoriesBloc.add(FetchCategories());
+    _userBloc.add(FetchUser());
+  }
+
+  @override
+  void dispose() {
+    _bookBloc.close();
+    _catogoriesBloc.close();
+    _userBloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,34 +49,69 @@ class HomeView extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
 
     return FloatingColorComponent(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: const HomeAppbarWidget(),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: context.mediaQueryWidth * .05,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(loc.wellcomeBackBunny, style: theme.textTheme.bodyMedium),
-                Text(
-                  loc.whatDoYouWantToRead,
-                  style: theme.textTheme.headlineLarge,
-                ),
-                20.height,
-                HomeSearchFieldWidget(),
-                20.height,
-                Expanded(
-                  child: HomeTabBarWidget(
-                    categoriesList: categoriesList,
-                    bookList: bookList,
+      child: BlocProvider(
+        create: (context) => _userBloc,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: const HomeAppbarWidget(),
+          ),
+          body: BlocProvider(
+            create: (context) => _catogoriesBloc,
+            child: BlocProvider(
+              create: (context) => _bookBloc,
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.mediaQueryWidth * .05,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        loc.wellcomeBackBunny,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      Text(
+                        loc.whatDoYouWantToRead,
+                        style: theme.textTheme.headlineLarge,
+                      ),
+
+                      20.height,
+                      Expanded(
+                        child: BlocBuilder<CatogoriesBloc, CategoriesState>(
+                          builder: (context, state) {
+                            switch (state.categoriesList!.status) {
+                              case Status.loading:
+                                return const Center(child: LoadingWidget());
+                              case Status.error:
+                                return Center(
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    state.categoriesList?.message.toString() ??
+                                        "Error",
+                                  ),
+                                );
+                              case Status.completed:
+                                final List<Category> categories =
+                                    state.categoriesList!.data!.categories;
+
+                                if (categories.isEmpty) {
+                                  return Center(
+                                    child: Text(loc.categoriesListIsEmpty),
+                                  );
+                                }
+                                return HomeTabBarWidget(
+                                  categoriesList: categories,
+                                );
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

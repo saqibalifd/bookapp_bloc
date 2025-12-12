@@ -8,3 +8,4 @@ export 'detail/detail_view.dart';
 export 'favourite/favourite_view.dart';
 export 'preview/preview_view.dart';
 export 'profile/profile_view.dart';
+export 'test_screen.dart';

@@ -3,7 +3,8 @@ import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEmailFieldWidget extends StatelessWidget {
-  const ProfileEmailFieldWidget({super.key});
+  final TextEditingController emailController;
+  const ProfileEmailFieldWidget({super.key, required this.emailController});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class ProfileEmailFieldWidget extends StatelessWidget {
         ),
         5.height,
         TextFormField(
+          controller: emailController,
           readOnly: true,
 
           decoration: InputDecoration(

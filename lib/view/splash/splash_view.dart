@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:bookapp/config/routes/route_names.dart';
+import 'package:bookapp/services/session_manager/session_controller.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
@@ -13,16 +12,34 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(
-      Duration(seconds: 3),
-      () => Navigator.pushNamed(context, RoutesName.onBoarding),
-    );
+    navigateUser();
+  }
+
+  void navigateUser() async {
+    await Future.delayed(Duration(seconds: 1), () => SessionController());
+    SessionController sessionController = SessionController();
+    await sessionController.getUserFromPreference();
+
+    if (SessionController.isOnBoardingPlayed == false ||
+        SessionController.isOnBoardingPlayed == null) {
+      Navigator.pushReplacementNamed(context, RoutesName.onBoarding);
+    } else if (SessionController.isLogin == true) {
+      Navigator.pushReplacementNamed(context, RoutesName.home);
+    } else {
+      Navigator.pushReplacementNamed(context, RoutesName.login);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Splash Screen')));
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {},
+          child: Text('Splash Screen'),
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:bookapp/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAppbarWidget extends StatelessWidget {
@@ -6,24 +5,24 @@ class ProfileAppbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final loc = AppLocalizations.of(context)!;
+    // final theme = Theme.of(context);
+    // final loc = AppLocalizations.of(context)!;
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
       forceMaterialTransparency: true,
-      actions: [
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            loc.save,
-            style: theme.textTheme.titleSmall!.copyWith(
-              color: theme.colorScheme.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
+      // actions: [
+      //   TextButton(
+      //     onPressed: () {},
+      //     child: Text(
+      //       loc.save,
+      //       style: theme.textTheme.titleSmall!.copyWith(
+      //         color: theme.colorScheme.primary,
+      //         fontWeight: FontWeight.bold,
+      //       ),
+      //     ),
+      //   ),
+      // ],
     );
   }
 }

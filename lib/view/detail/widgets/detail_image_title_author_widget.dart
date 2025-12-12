@@ -16,14 +16,13 @@ class DetailImageTitleAuthorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final String imageUrl = 'https://picsum.photos/400/300';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: imageUrl.simpleNetworkImage(
+            child: image.simpleNetworkImage(
               height: context.mediaQueryHeight * .34,
               width: context.mediaQueryHeight * .27,
             ),

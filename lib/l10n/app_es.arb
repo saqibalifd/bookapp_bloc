@@ -40,7 +40,16 @@
     "favourite": "Favorito",
     "placeOrder": "Realizar pedido",
     "save": "Guardar",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "enterEmail": "Ingrese correo electrónico",
+    "enterPassword": "Ingrese contraseña",
+    "emailIsNotCorrect": "El correo electrónico no es correcto",
+    "pleaseEnterGreateSixChar": "Por favor ingrese una contraseña de más de 6 caracteres",
+    "categoriesListIsEmpty":"¡Vaya! La lista de categorías está vacía en este momento.",
+    "somethingWentWrong":"¡Vaya! Algo no funcionó."
+
+
+
 
 
 }

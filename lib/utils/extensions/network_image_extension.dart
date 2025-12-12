@@ -4,6 +4,7 @@ import 'package:bookapp/config/icon/app_icons.dart';
 import 'package:bookapp/utils/extensions/general_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 extension SimpleNetworkImageExtension on String {
   Widget simpleNetworkImage({
@@ -21,29 +22,26 @@ extension SimpleNetworkImageExtension on String {
 
         return ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
-          child: Image.network(
-            this,
+          child: CachedNetworkImage(
+            imageUrl: this,
             height: height ?? context.mediaQueryHeight * .25,
             width: width ?? context.mediaQueryHeight * .25,
             fit: fit,
-            loadingBuilder: (context, child, progress) {
-              if (progress == null) return child;
-              return Container(
-                height: height ?? context.mediaQueryHeight * .25,
-                width: width ?? context.mediaQueryHeight * .25,
-                color: theme.colorScheme.outline,
-                child: Center(
-                  child: Platform.isAndroid
-                      ? CircularProgressIndicator(
-                          color: theme.colorScheme.primary,
-                        )
-                      : CupertinoActivityIndicator(
-                          color: theme.colorScheme.primary,
-                        ),
-                ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) =>
+            placeholder: (context, url) => Container(
+              height: height ?? context.mediaQueryHeight * .25,
+              width: width ?? context.mediaQueryHeight * .25,
+              color: theme.colorScheme.outline,
+              child: Center(
+                child: Platform.isAndroid
+                    ? CircularProgressIndicator(
+                        // color: effectivePlaceholderColor,
+                      )
+                    : CupertinoActivityIndicator(
+                        // color: effectivePlaceholderColor,
+                      ),
+              ),
+            ),
+            errorWidget: (context, url, error) =>
                 Icon(AppIcons.imageBroken, color: theme.colorScheme.primary),
           ),
         );

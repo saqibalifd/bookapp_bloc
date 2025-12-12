@@ -23,7 +23,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loginBloc = LoginBloc(getIt());
   }

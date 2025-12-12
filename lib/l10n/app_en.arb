@@ -40,7 +40,14 @@
     "favourite":"Favourite",
     "placeOrder":"Place Order",
     "save":"Save",
-    "about":"About"
+    "about":"About",
+    "enterEmail":"Enter email",
+    "enterPassword":"Enter password",
+    "emailIsNotCorrect":"Email is not correct",
+    "pleaseEnterGreateSixChar":"please enter password greater than 6 char",
+    "categoriesListIsEmpty":"Oops! The categories list is currently empty",
+    "somethingWentWrong":"Oops! Something didn’t work."
+
 
 
 }

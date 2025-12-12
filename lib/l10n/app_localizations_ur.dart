@@ -133,4 +133,22 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get about => 'کے بارے میں';
+
+  @override
+  String get enterEmail => 'ای میل درج کریں';
+
+  @override
+  String get enterPassword => 'پاس ورڈ درج کریں';
+
+  @override
+  String get emailIsNotCorrect => 'ای میل درست نہیں ہے';
+
+  @override
+  String get pleaseEnterGreateSixChar => 'براہ کرم 6 حروف سے زیادہ کا پاس ورڈ درج کریں';
+
+  @override
+  String get categoriesListIsEmpty => 'اوہ! فی الحال زمرہ جات کی فہرست خالی ہے۔';
+
+  @override
+  String get somethingWentWrong => 'اوہ! کچھ صحیح نہیں ہوا۔';
 }
