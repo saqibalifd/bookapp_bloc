@@ -1,0 +1,11 @@
+export 'splash/splash_view.dart';
+export 'onboarding/onboarding_view.dart';
+export 'login/login_view.dart';
+export 'signup/signup_view.dart';
+export 'home/home_view.dart';
+export 'forgot_password/forgot_password_view.dart';
+export 'detail/detail_view.dart';
+export 'favourite/favourite_view.dart';
+export 'preview/preview_view.dart';
+export 'profile/profile_view.dart';
+export 'test_screen.dart';
